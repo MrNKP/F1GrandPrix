@@ -17,6 +17,7 @@ namespace F1GrandPrix.Models.Users.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        //
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
