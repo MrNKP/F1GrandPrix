@@ -1,0 +1,115 @@
+﻿@model F1GrandPrix.Models.Paging.IndexView
+@using F1GrandPrix.Models.Paging
+
+@{
+    ViewBag.Title = "Каталог";
+}
+<h2>@ViewBag.Title.</h2>
+<h4>База команд</h4>
+
+<label class="control-panel header-3" style="text-align:center">
+    Фильтр
+</label>
+
+<form method="get">
+    <div class="form-inline">
+        <div class="row">
+            <div class="col-md-2">
+                <h5 class="header-3" style="text-align:center"><strong>Название</strong></h5>
+                <input list="teamName" name="teamName" autofocus>
+                <datalist id="teamName">
+                    <option value="Mercedes Factory Team">Mercedes Factory Team</option>
+                    <option value="Ferrari Factory Team">Ferrari Factory Team</option>
+                    <option value="Red Bull Renault">Red Bull Renault</option>
+                    <option value="Williams Mercedes">Williams Mercedes</option>
+                </datalist>
+            </div>
+            <div class="col-md-2">
+                <h5 class="header-3" style="text-align:center"><strong>Пилот</strong></h5>
+                <input list="driverSurname" name="driverSurname" autofocus>
+                <datalist id="driverSurname">
+                    <option value="Hamilton">Hamilton</option>
+                    <option value="Vettel">Vettel</option>
+                    <option value="Sirotkin">Sirotkin</option>
+                    <option value="Kvyat">Kvyat</option>
+                </datalist>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-md-2">
+                <input type="submit" value="Применить">
+            </div>
+
+            <form action="/Home/Catalog" class="col-md-2">
+                <button type="submit">Все команды</button>
+            </form>
+
+        </div>
+    </div>
+</form>
+
+<br />
+
+<label class="control-panel header-3" style="text-align:center">
+    Список
+</label>
+
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Name
+        </th>
+        <th></th>
+        <th>
+            Driver1
+        </th>
+        <th></th>
+        <th></th>
+        <th>
+            Driver2
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model.Teams)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Driver.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Driver.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Driver.Car.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Driver1.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Driver1.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Driver1.Car.Name)
+            </td>
+            <td>
+                <p><a href="/Home/AddToDetail/@item.ID">Подробнее</a></p>
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="btn-group">
+    @Html.PageLinks(Model.pageInfo, x => Url.Action("Catalog", new { page = x }))
+</div>

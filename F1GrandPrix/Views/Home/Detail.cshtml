@@ -1,0 +1,168 @@
+﻿@using F1GrandPrix.Models.Detail
+@model IEnumerable<DetailTeamPos>
+
+@{
+    ViewBag.Title = "Подробнее";
+}
+
+<h1>@ViewBag.Message</h1>
+
+@if (Model.Count() != 0)
+{
+    <table class="table">
+        <tr>
+            <th>
+                Команда
+            </th>
+        </tr>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Название
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.team.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.team.Name)
+                </td>
+            </tr>
+        }
+        <tr></tr>
+        <tr>
+            <th>
+                Пилот 1
+            </th>
+        </tr>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Имя
+            </th>
+            <th>
+                Фамилия
+            </th>
+            <th>
+                Болид
+            </th>
+            <th>
+                Мощность
+            </th>
+            <th>
+                Максимальная скорость
+            </th>
+            <th>
+                Car ID
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.team.Driver.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.team.Driver.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.team.Driver.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.team.Driver.Car.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.team.Driver.Car.Engine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.team.Driver.Car.MaxSpeed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.team.Driver.Car.ID)
+                </td>
+            </tr>
+        }
+    <tr></tr>
+    <tr>
+        <th>
+            Пилот 2
+        </th>
+    </tr>
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Имя
+        </th>
+        <th>
+            Фамилия
+        </th>
+        <th>
+            Болид
+        </th>
+        <th>
+            Мощность
+        </th>
+        <th>
+            Максимальная скорость
+        </th>
+        <th>
+            Car ID
+        </th>
+    </tr>
+    @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.team.Driver1.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.team.Driver1.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.team.Driver1.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.team.Driver1.Car.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.team.Driver1.Car.Engine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.team.Driver1.Car.MaxSpeed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.team.Driver1.Car.ID)
+            </td>
+        </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="text-center">
+        <br />
+        <h1> 🙁 </h1>
+        <h1 class="header-1">Тут пока пусто</h1>
+    </div>
+}
+
+<br />
+
+<form action="/Home/ClearDetail" class="col-md-2">
+    <button type="submit">Очистить</button>
+</form>
+
+<form action="/Home/Catalog" class="col-md-2">
+    <button type="submit">Вернуться</button>
+</form>
+
+<br />

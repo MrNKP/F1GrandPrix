@@ -1,0 +1,28 @@
+﻿@model F1GrandPrix.Models.DataBase.Driver
+
+@{
+    ViewBag.Title = "About";
+}
+
+<h1>Добавление пилота</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.ID, "ID")
+    <br />
+    @Html.EditorFor(model => model.ID)
+    <br /><br />
+    @Html.LabelFor(model => model.Name, "Name")
+    <br />
+    @Html.EditorFor(model => model.Name)
+    <br /><br />
+    @Html.LabelFor(model => model.Surname, "Surname")
+    <br />
+    @Html.EditorFor(model => model.Surname)
+    <br /><br />
+    @Html.LabelFor(model => model.Car_ID, "Car_ID")
+    <br />
+    @Html.EditorFor(model => model.Car_ID)
+    <br /><br />
+    <input type="submit" value="Добавить" />
+}
