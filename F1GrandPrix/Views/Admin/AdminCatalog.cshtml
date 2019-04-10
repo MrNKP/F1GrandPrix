@@ -105,8 +105,8 @@
                 @Html.DisplayFor(modelItem => item.Driver1.Car.Name)
             </td>
             <td>
-                <p><a href="/Home/AddToDetail/@item.ID">Подробнее</a></p>
-                <p>Редактировать</p>
+                @Html.ActionLink("EditDriver1", "EditDriverDB", new { driverID = item.Driver.ID }) |
+                @Html.ActionLink("EditDriver2", "EditDriverDB", new { driverID = item.Driver1.ID })
             </td>
         </tr>
     }

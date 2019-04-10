@@ -87,33 +87,5 @@ namespace F1GrandPrix.Controllers
             myTeam.ClearDetail();
             return Redirect("/Home/Detail");
         }
-
-        [HttpGet]
-        public ActionResult Add()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Add(Driver driver)
-        {
-            //F1Context db = new F1Context();
-            db.Drivers.Add(driver);
-            db.SaveChanges();
-            return Redirect("/Home/Index");
-        }
-        public ActionResult Edit()
-        {
-            return View();
-        }
-        public ActionResult Edit(Team team, Driver driverSrc, Driver driverExt)
-        {
-            Team t = db.Teams.Find(team);
-            Driver dr1 = db.Drivers.Find(driverSrc);
-            Driver dr2 = db.Drivers.Find(driverExt);
-            if (t.Driver == dr1) t.Driver = dr2;
-            if (t.Driver1 == dr1) t.Driver1 = dr2;
-            db.SaveChanges();
-            return Redirect("/Home/Catalog");
-        }
     }
 }

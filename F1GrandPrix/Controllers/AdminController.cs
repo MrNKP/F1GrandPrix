@@ -18,6 +18,7 @@ namespace F1GrandPrix.Models.Users.Controllers
     [Authorize(Roles = "Administrators")]
     public class AdminController : Controller
     {
+        private F1Context db = new F1Context();
         public ActionResult Index()
         {
             return View(UserManager.Users);
@@ -157,7 +158,7 @@ namespace F1GrandPrix.Models.Users.Controllers
         public ActionResult AdminCatalog(String teamName, String driverSurname, TeamFilter teamFilter = null, bool restore = false, int page = 1)
         {
             //ViewBag.Message = "Catalog";
-            F1Context db = new F1Context();
+            //F1Context db = new F1Context();
             IQueryable<Team> teams = db.Teams;
 
             if (teamFilter == null)
@@ -189,6 +190,46 @@ namespace F1GrandPrix.Models.Users.Controllers
         public ActionResult AdminIndex()
         {
             return View("~/Views/Admin/AdminIndex.cshtml");
+        }
+        [HttpGet]
+        [Authorize(Roles = "Administrators")]
+        public ActionResult Add()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Authorize(Roles = "Administrators")]
+        public ActionResult Add(Driver driver)
+        {
+            //F1Context db = new F1Context();
+            db.Drivers.Add(driver);
+            db.SaveChanges();
+            return Redirect("/Admin/AdminCatalog");
+        }
+        [Authorize(Roles = "Administrators")]
+        public ActionResult ChooseTeam(Team team)
+        {
+            return Redirect("/Admin/EditTeam");
+        }
+        [HttpGet]
+        [Authorize(Roles = "Administrators")]
+        public ActionResult EditDriverDB(int driverID)
+        {
+            //Team team = db.Teams.Find(teamID);
+            Driver drv = db.Drivers.Find(driverID);
+            if (drv != null)
+            {
+                return View(drv);
+            }
+            return HttpNotFound();
+        }
+        [HttpPost]
+        [Authorize(Roles = "Administrators")]
+        public ActionResult EditDriverDB(Driver driver)
+        {
+            db.Entry(driver).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("AdminCatalog");
         }
     }
 }
