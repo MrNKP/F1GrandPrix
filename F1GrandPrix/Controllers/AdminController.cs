@@ -19,6 +19,7 @@ namespace F1GrandPrix.Models.Users.Controllers
     public class AdminController : Controller
     {
         private F1Context db = new F1Context();
+        private Random rnd = new Random();
         public ActionResult Index()
         {
             return View(UserManager.Users);
@@ -202,6 +203,8 @@ namespace F1GrandPrix.Models.Users.Controllers
         public ActionResult Add(Driver driver)
         {
             //F1Context db = new F1Context();
+            int id = rnd.Next(1,10000);
+            driver.ID = 2000 + id;
             db.Drivers.Add(driver);
             db.SaveChanges();
             return Redirect("/Admin/AdminCatalog");
